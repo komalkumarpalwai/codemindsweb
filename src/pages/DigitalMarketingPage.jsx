@@ -21,15 +21,15 @@ const services = [
 
 const DigitalMarketingPage = () => {
   return (
-    <div className="min-h-screen bg-white text-gray-800 px-4 py-12 " id="digital-marketing">
+    <div className="bg-white text-gray-800 px-6 py-12" id="digital-marketing">
       {/* Hero Section */}
       <motion.div
-        className="text-center mb-12"
+        className="text-center max-w-3xl mx-auto mb-10"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-4xl font-bold mb-4  text-cyan-400">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-cyan-400">
           Digital Marketing Solutions
         </h1>
         <p className="text-lg text-gray-600">
@@ -55,12 +55,11 @@ const DigitalMarketingPage = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="text-center mt-16">
+      <div className="text-center mt-14">
         <motion.button
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
-          className="px-6 py-3 
-            bg-cyan-400 hover:bg-cyan-500 text-black font-semibold px-6 py-3 rounded-full shadow-lg transition-transform transform hover:scale-105"
+          className="bg-cyan-400 hover:bg-cyan-500 text-black font-semibold px-6 py-3 rounded-full shadow-md transition duration-300"
         >
           Get a Free Strategy Call
         </motion.button>

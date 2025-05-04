@@ -32,9 +32,10 @@ const FAQsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-cyan-50 px-6 py-20">
+    <div className="bg-gradient-to-b from-white to-cyan-50 px-6 py-10">
+      {/* Header */}
       <motion.div
-        className="max-w-4xl mx-auto text-center mb-16"
+        className="max-w-4xl mx-auto text-center mb-12"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -47,11 +48,12 @@ const FAQsPage = () => {
         </p>
       </motion.div>
 
+      {/* FAQ List */}
       <div className="max-w-3xl mx-auto space-y-6">
         {faqs.map((faq, index) => (
           <motion.div
             key={index}
-            className="rounded-xl border border-cyan-100 bg-white shadow-lg overflow-hidden"
+            className="rounded-xl border border-cyan-100 bg-white shadow-md overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -59,7 +61,7 @@ const FAQsPage = () => {
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full text-left px-8 py-6 text-2xl font-semibold text-gray-800 flex justify-between items-center hover:bg-cyan-50 transition-all duration-300 focus:outline-none"
+              className="w-full text-left px-6 py-5 text-xl font-semibold text-gray-800 flex justify-between items-center hover:bg-cyan-50 transition-all duration-300 focus:outline-none"
             >
               <span>{faq.question}</span>
               <motion.span
@@ -74,7 +76,7 @@ const FAQsPage = () => {
             <AnimatePresence>
               {openIndex === index && (
                 <motion.div
-                  className="px-8 pb-6 text-gray-600 text-lg leading-relaxed"
+                  className="px-6 pb-5 text-gray-600 text-base leading-relaxed"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
