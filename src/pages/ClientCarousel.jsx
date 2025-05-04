@@ -10,6 +10,9 @@ const ClientCarousel = () => {
     { name: "Knowvity", url: "https://course-selling-web.onrender.com/" },
     { name: "Radhika Fashion", url: "https://ecom-demo-0c3u.onrender.com/" },
     { name: "Vijayaa Makeovers", url: "https://makeover-web-2.onrender.com/" },
+    { name: "Knowvity", url: "https://course-selling-web.onrender.com/" },
+    { name: "Radhika Fashion", url: "https://ecom-demo-0c3u.onrender.com/" },
+    { name: "Vijayaa Makeovers", url: "https://makeover-web-2.onrender.com/" },
   ];
 
   const timelineData = [

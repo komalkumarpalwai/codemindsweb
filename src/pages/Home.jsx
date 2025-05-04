@@ -6,11 +6,7 @@ const Home = () => {
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black text-white">
-      {/* Animated Border SVG */}
-      
-      {/* Zigzag animated image background */}
-  
-      {/* Main animated content */}
+    
       <motion.div
         className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center"
         initial={{ opacity: 0, y: 50 }}
@@ -62,9 +58,9 @@ const Home = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 3.0, duration: 0.5 }}
         >
-          <button className=" bg-cyan-400 hover:bg-cyan-500 text-black font-semibold px-6 py-3 rounded-full shadow-lg transition-transform transform hover:scale-105">
+      <a href="/bookacall">   <button className=" bg-cyan-400 hover:bg-cyan-500 text-black font-semibold px-6 py-3 rounded-full shadow-lg transition-transform transform hover:scale-105">
             Book a Call
-          </button>
+          </button></a> 
         </motion.div>
       </motion.div>
     </div>

@@ -17,3 +17,6 @@
     width: 200%; /* Ensures all logos are inside + duplicated */
   }
 }
+body a{
+  cursor: pointer;
+}

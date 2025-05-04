@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link as ScrollLink } from 'react-scroll'; // scroll for in-page
-import { Link as RouterLink } from 'react-router-dom'; // router for external routes
+import { Link as ScrollLink } from 'react-scroll';
+import { Link as RouterLink } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 const underlineVariants = {
@@ -82,9 +82,14 @@ const PremiumNavbar = () => {
                   {name}
                 </ScrollLink>
               ) : (
-                <RouterLink to={href} className="block">
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
                   {name}
-                </RouterLink>
+                </a>
               )}
               <motion.span
                 variants={underlineVariants}
@@ -95,7 +100,7 @@ const PremiumNavbar = () => {
 
           {/* Contact */}
           <motion.a
-            href="#contact"
+            href="/contact"
             initial={{ scale: 1, boxShadow: '0px 0px 0px rgba(1,196,197,0)' }}
             whileHover={{
               scale: 1.05,
@@ -145,14 +150,16 @@ const PremiumNavbar = () => {
                   {name}
                 </ScrollLink>
               ) : (
-                <RouterLink
+                <a
                   key={name}
-                  to={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block py-3 rounded-md text-base font-medium text-white hover:text-gray-300 text-center cursor-pointer"
                 >
                   {name}
-                </RouterLink>
+                </a>
               )
             )}
             <a

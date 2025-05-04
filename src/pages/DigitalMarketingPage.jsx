@@ -56,13 +56,13 @@ const DigitalMarketingPage = () => {
 
       {/* CTA Section */}
       <div className="text-center mt-14">
-        <motion.button
+     <a href="/bookacall">   <motion.button
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
           className="bg-cyan-400 hover:bg-cyan-500 text-black font-semibold px-6 py-3 rounded-full shadow-md transition duration-300"
         >
           Get a Free Strategy Call
-        </motion.button>
+        </motion.button></a>
       </div>
     </div>
   );
