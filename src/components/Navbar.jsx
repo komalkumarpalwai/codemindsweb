@@ -56,7 +56,7 @@ const PremiumNavbar = () => {
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <RouterLink to="/">
-          <img src={logo} alt="Logo" className="h-10 w-auto cursor-pointer" />
+          <img src={logo} alt="Logo" className="h-6 w-auto cursor-pointer" />
         </RouterLink>
 
         {/* Desktop Menu */}

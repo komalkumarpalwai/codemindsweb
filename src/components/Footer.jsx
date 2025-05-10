@@ -1,6 +1,14 @@
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { useEffect, useRef } from 'react';
-import { FiMail, FiPhone, FiMapPin, FiInstagram, FiTwitter, FiYoutube, FiFacebook } from 'react-icons/fi';
+import {
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiInstagram,
+  FiTwitter,
+  FiYoutube,
+  FiLinkedin
+} from 'react-icons/fi';
 
 const PremiumFooter = () => {
   const controls = useAnimation();
@@ -38,10 +46,9 @@ const PremiumFooter = () => {
   };
 
   const socialLinks = [
-    { icon: <FiInstagram />, url: "#", name: "Instagram" },
-    { icon: <FiTwitter />, url: "#", name: "Twitter" },
-    { icon: <FiYoutube />, url: "#", name: "YouTube" },
-    { icon: <FiFacebook />, url: "#", name: "Facebook" }
+    { icon: <FiInstagram />, url: "https://www.instagram.com/codemindswebservices/", name: "Instagram" },
+    { icon: <FiYoutube />, url: "https://www.youtube.com/@raoopvt", name: "YouTube" },
+    { icon: <FiLinkedin />, url: "https://www.linkedin.com/company/codeminds-web-services/", name: "LinkedIn" }
   ];
 
   return (
@@ -50,7 +57,7 @@ const PremiumFooter = () => {
       initial="hidden"
       animate={controls}
       variants={containerVariants}
-      className="bg-gradient-to-r from-black via-gray-800 to-black text-white py-16 px-4" // Added gradient
+      className="bg-gradient-to-r from-black via-gray-800 to-black text-white py-16 px-4"
     >
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -61,7 +68,7 @@ const PremiumFooter = () => {
               whileHover="hover"
               className="text-2xl font-bold mb-4"
             >
-          Codeminds
+              Codeminds
             </motion.h3>
             <motion.p 
               variants={itemVariants}

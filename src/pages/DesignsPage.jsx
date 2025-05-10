@@ -442,72 +442,86 @@ const DesignServicesPage = () => {
    <LandingPageB />
 
       {/* CTA Section */}
-      <section className="relative text-center py-28 bg-gradient-to-r from-[#00A2C2] to-[#008C9E] text-white overflow-hidden">
-  <div className="absolute inset-0 overflow-hidden opacity-10">
-    {[...Array(20)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute rounded-full bg-white"
-        style={{
-          width: Math.random() * 10 + 5,
-          height: Math.random() * 10 + 5,
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`
-        }}
-        animate={{
-          y: [0, (Math.random() - 0.5) * 20],
-          x: [0, (Math.random() - 0.5) * 20]
-        }}
-        transition={{
-          duration: Math.random() * 10 + 5,
-          repeat: Infinity,
-          repeatType: "reverse"
-        }}
-      />
-    ))}
-  </div>
-  
-  <div className="relative z-10 max-w-4xl mx-auto px-6">
-    <motion.h2
-      className="text-4xl md:text-5xl font-extrabold mb-6"
-      initial={{ opacity: 0, y: -20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-    >
-      Ready to Elevate Your Brand?
-    </motion.h2>
-    <motion.p
-      className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 1, delay: 0.3 }}
-      viewport={{ once: true }}
-    >
-      Let's create something beautiful together that represents your unique vision
-    </motion.p>
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 1, delay: 0.6 }}
-      viewport={{ once: true }}
-      className="flex flex-col sm:flex-row justify-center gap-4"
-    >
-      <Link
-        to="/contact"
-        className="inline-block bg-white text-[#00A2C2] px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-      >
-        Start Your Design Project
-      </Link>
-      <Link
-        to="/services"
-        className="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-[#00A2C2] transition-all duration-300 transform hover:-translate-y-1"
-      >
-        Explore All Services
-      </Link>
-    </motion.div>
-  </div>
-</section>
+    <section className="relative text-center py-28 bg-gradient-to-r from-[#00A2C2] to-[#008C9E] text-white overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden opacity-10">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-white"
+            style={{
+              width: Math.random() * 10 + 5,
+              height: Math.random() * 10 + 5,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, (Math.random() - 0.5) * 20],
+              x: [0, (Math.random() - 0.5) * 20],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 5,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto px-6">
+        <motion.h2
+          className="text-4xl md:text-5xl font-extrabold mb-6"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          Ready to Elevate Your Brand?
+        </motion.h2>
+        <motion.p
+          className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          Let's create something beautiful together that represents your unique vision
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="flex flex-col sm:flex-row justify-center gap-4"
+        >
+          <Link
+            to="/contact"
+            className="inline-block bg-white text-[#00A2C2] px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          >
+            Start Your Design Project
+          </Link>
+
+          {/* Redesigned Explore All Services Button */}
+          <Link
+            to="/services"
+            className="relative inline-block group px-8 py-4 text-lg font-bold text-white border-2 border-white rounded-xl transition-all duration-300 overflow-hidden"
+          >
+            <span className="relative z-10 flex items-center justify-center gap-2 group-hover:text-[#00A2C2] transition-colors duration-300">
+              Explore All Services
+              <svg
+                className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+            <span className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 z-0 rounded-xl" />
+          </Link>
+        </motion.div>
+      </div>
+    </section>
 
     </div>
   );

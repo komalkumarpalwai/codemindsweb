@@ -31,12 +31,17 @@ const App = () => {
     window.scrollTo(0, 0);
   }, [location]);
 
+  // Paths where navbar/footer should be hidden
+  const hideLayout = ['/admin-dashboard', '/employee-dashboard', '/signup'];
+
+  const shouldHideLayout = hideLayout.some(path =>
+    location.pathname.startsWith(path)
+  );
+
   return (
     <div className="min-h-screen flex flex-col justify-between">
-      {/* Show navbar on all routes except dashboards */}
-      {!location.pathname.startsWith('/admin-dashboard') && 
-       !location.pathname.startsWith('/employee-dashboard') && <Navbar />}
-      
+      {!shouldHideLayout && <Navbar />}
+
       <Routes>
         {/* Main pages with navbar and footer */}
         <Route path="/" element={
@@ -60,16 +65,13 @@ const App = () => {
         <Route path="/digitalmarketingsection" element={<DigitalMarketingPage />} />
         <Route path="/brands" element={<BrandsPage />} />
         <Route path="/signup" element={<SignupPage />} />
-       
-        
+
         {/* Dashboard pages (without navbar/footer) */}
         <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
 
-      {/* Show footer on all routes except dashboards */}
-      {!location.pathname.startsWith('/admin-dashboard') && 
-       !location.pathname.startsWith('/employee-dashboard') && <Footer />}
+      {!shouldHideLayout && <Footer />}
     </div>
   );
 };

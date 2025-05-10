@@ -1,0 +1,127 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "Full Stack Web Development",
+      "slug": "full-stack-web-development",
+      "shortDescription": "Master both front-end and back-end development with modern technologies",
+      "category": "Full Stack",
+      "featured": true,
+      "rating": 4.8,
+      "duration": "12 weeks",
+      "instructor": "Sarah Johnson",
+      "image": "https://miro.medium.com/v2/resize:fit:1400/1*V-Jp13LvtVc2IiY2fp4qYw.jpeg",
+      "price": 399.99,
+      "enrollment": 2500,
+      "description": "Learn to build complete web applications using React, Node.js, Express, and MongoDB",
+      "syllabus": [
+        {
+          "week": 1,
+          "topic": "Web Fundamentals",
+          "content": ["HTML5", "CSS3", "JavaScript ES6+"]
+        },
+        {
+          "week": 2,
+          "topic": "Frontend Development",
+          "content": ["React Fundamentals", "State Management", "Component Architecture"]
+        },
+        {
+          "week": 3,
+          "topic": "Backend Development",
+          "content": ["Node.js", "Express.js", "REST APIs"]
+        }
+      ],
+      "prerequisites": ["Basic programming knowledge"],
+      "reviews": [
+        {
+          "user": "Alex Thompson",
+          "rating": 4.9,
+          "comment": "Comprehensive course that covers everything from basics to deployment!",
+          "date": "2024-03-15"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Frontend Development Masterclass",
+      "slug": "frontend-development-masterclass",
+      "shortDescription": "Become an expert in modern frontend development and UI/UX",
+      "category": "Frontend",
+      "featured": true,
+      "rating": 4.7,
+      "duration": "10 weeks",
+      "instructor": "Michael Chen",
+      "image": "https://t3.ftcdn.net/jpg/02/92/88/72/360_F_292887204_2wH041phSQo70eqaE9GRqFvn5MmQ4B8w.jpg",
+      "price": 299.99,
+      "enrollment": 1800,
+      "description": "Master professional frontend development with React, TypeScript, and modern tooling",
+      "syllabus": [
+        {
+          "week": 1,
+          "topic": "Advanced CSS",
+          "content": ["Flexbox", "Grid", "Animations"]
+        },
+        {
+          "week": 2,
+          "topic": "JavaScript Deep Dive",
+          "content": ["ES6+ Features", "TypeScript", "Functional Programming"]
+        },
+        {
+          "week": 3,
+          "topic": "React Ecosystem",
+          "content": ["Next.js", "State Management", "Testing"]
+        }
+      ],
+      "prerequisites": ["Basic HTML/CSS knowledge"],
+      "reviews": [
+        {
+          "user": "Emma Wilson",
+          "rating": 4.8,
+          "comment": "Excellent course with real-world projects!",
+          "date": "2024-04-01"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Backend Development with Node.js",
+      "slug": "backend-development-nodejs",
+      "shortDescription": "Build scalable and secure backend systems",
+      "category": "Backend",
+      "featured": true,
+      "rating": 4.6,
+      "duration": "8 weeks",
+      "instructor": "Raj Patel",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-3pR2tW_R81xkSUHDAtklGkIlsR5mrm0RcA&s",
+      "price": 349.99,
+      "enrollment": 1500,
+      "description": "Learn to build production-ready backend systems with Node.js, databases, and cloud services",
+      "syllabus": [
+        {
+          "week": 1,
+          "topic": "Node.js Fundamentals",
+          "content": ["Event Loop", "Streams", "File System"]
+        },
+        {
+          "week": 2,
+          "topic": "Database Integration",
+          "content": ["MongoDB", "PostgreSQL", "ORM/ODM"]
+        },
+        {
+          "week": 3,
+          "topic": "Cloud Deployment",
+          "content": ["Docker", "AWS", "CI/CD Pipelines"]
+        }
+      ],
+      "prerequisites": ["JavaScript basics"],
+      "reviews": [
+        {
+          "user": "Sophia Martinez",
+          "rating": 4.7,
+          "comment": "Great focus on security and scalability!",
+          "date": "2024-02-28"
+        }
+      ]
+    }
+  ]
+}

@@ -1,18 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
 import radhika from "../assets/radhika.jpeg";
-import radhikaorg from "../assets/radhikaorg.jpeg";
+import radhikaorg from "../assets/radhikaorg.png";
 import avacollege from "../assets/avacollege.jpeg";
 import knowvity from "../assets/knowvity.png";
 
 const ClientCarousel = () => {
   const partners = [
-    { name: "Knowvity", url: "https://course-selling-web.onrender.com/" },
-    { name: "Radhika Fashion", url: "https://ecom-demo-0c3u.onrender.com/" },
-    { name: "Vijayaa Makeovers", url: "https://makeover-web-2.onrender.com/" },
-    { name: "Knowvity", url: "https://course-selling-web.onrender.com/" },
-    { name: "Radhika Fashion", url: "https://ecom-demo-0c3u.onrender.com/" },
-    { name: "Vijayaa Makeovers", url: "https://makeover-web-2.onrender.com/" },
+    { name: "Knowvity", url: "http://www.knowvity.com/" },
+    { name: "Radhika Fashion", url: "http://www.radhikarajpurohit.com/" },
+    { name: "Vijayaa Makeovers", url: "https://www.vijayaamakeovers.com/" },
+ { name: "Knowvity", url: "http://www.knowvity.com/" },
+    { name: "Radhika Fashion", url: "http://www.radhikarajpurohit.com/" },
+   { name: "Vijayaa Makeovers", url: "https://www.vijayaamakeovers.com/" },
   ];
 
   const timelineData = [
@@ -22,7 +22,7 @@ const ClientCarousel = () => {
       description:
         "Premium coding platform with animated homepage and course showcase.",
       imageUrl: knowvity,
-      link: "https://course-selling-web.onrender.com/",
+      link: "http://www.knowvity.com/",
     },
     {
       title: "Radhika Fashion",
@@ -30,7 +30,7 @@ const ClientCarousel = () => {
       description:
         "Fully responsive fashion eCommerce website using MERN stack.",
       imageUrl: radhikaorg,
-      link: "https://ecom-demo-0c3u.onrender.com/",
+      link: "http://www.radhikarajpurohit.com/",
     },
     {
       title: "Vijayaa Makeovers",
@@ -38,7 +38,7 @@ const ClientCarousel = () => {
       description:
         "Salon booking system with category-wise services and admin panel.",
       imageUrl: radhika,
-      link: "https://makeover-web-2.onrender.com/",
+      link: "https://www.vijayaamakeovers.com/",
     },
     {
       title: "Avva college",
