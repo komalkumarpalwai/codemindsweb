@@ -1,55 +1,75 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+
+// Main sections (for homepage)
 import Home from "./pages/Home";
 import ClientCarousel from "./pages/ClientCarousel";
 import GraphicDesignPage from "./pages/GraphicDesignPage";
 import DigitalMarketingPage from "./pages/DigitalMarketingPage";
 import BrandsPage from "./pages/BrandsPage";
 import FAQsPage from "./pages/FAQsPage";
+
+// Route-based pages
 import PricingPage from "./pages/Pricing";
 import InternshipPage from "./pages/InternshipPage";
-import ContactPage from "./pages/Contact"; // Assuming the path to ContactPage
-import BookCallPage from "./pages/Bookacall"; // Assuming the path to BookCallPage
+import ContactPage from "./pages/Contact";
+import BookCallPage from "./pages/Bookacall";
+import WebDesignPage from "./pages/WebDesignPage";
+import DigitalMarketingMainPage from "./pages/DigitalMarketingMainPage";
+import DesignsPage from "./pages/DesignsPage";
+import SignupPage from "./pages/SignupPage";
+
+import EmployeeDashboard from "./pages/Employeedashboard";
+import AdminDashboard from "./pages/Admindashboard";
 
 const App = () => {
   const location = useLocation();
 
-  // Scroll to the top of the page on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const isPricing = location.pathname === '/pricing';
-  const isInternship = location.pathname === '/internship';
-  const isContact = location.pathname === '/contact';
-  const isBookCall = location.pathname === '/bookacall';
-
   return (
     <div className="min-h-screen flex flex-col justify-between">
-      <Navbar />
+      {/* Show navbar on all routes except dashboards */}
+      {!location.pathname.startsWith('/admin-dashboard') && 
+       !location.pathname.startsWith('/employee-dashboard') && <Navbar />}
+      
+      <Routes>
+        {/* Main pages with navbar and footer */}
+        <Route path="/" element={
+          <>
+            <Home />
+            <ClientCarousel />
+            <GraphicDesignPage />
+            <DigitalMarketingPage />
+            <BrandsPage />
+            <FAQsPage />
+          </>
+        } />
+        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/internship" element={<InternshipPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/bookacall" element={<BookCallPage />} />
+        <Route path="/webdesign" element={<WebDesignPage />} />
+        <Route path="/digitalmarketing" element={<DigitalMarketingMainPage />} />
+        <Route path="/designs" element={<DesignsPage />} />
+        <Route path="/graphicdesign" element={<DesignsPage />} />
+        <Route path="/digitalmarketingsection" element={<DigitalMarketingPage />} />
+        <Route path="/brands" element={<BrandsPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+       
+        
+        {/* Dashboard pages (without navbar/footer) */}
+        <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+      </Routes>
 
-      {isPricing ? (
-        <PricingPage />
-      ) : isInternship ? (
-        <InternshipPage />
-      ) : isContact ? (
-        <ContactPage />
-      ) : isBookCall ? (
-        <BookCallPage />
-      ) : (
-        <>
-          <Home />
-          <ClientCarousel />
-          <GraphicDesignPage />
-          <DigitalMarketingPage />
-          <BrandsPage />
-          <FAQsPage />
-        </>
-      )}
-
-      <Footer />
+      {/* Show footer on all routes except dashboards */}
+      {!location.pathname.startsWith('/admin-dashboard') && 
+       !location.pathname.startsWith('/employee-dashboard') && <Footer />}
     </div>
   );
 };

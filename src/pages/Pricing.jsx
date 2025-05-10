@@ -52,14 +52,14 @@ const plans = [
 
 const PricingPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white px-6 py-20">
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white px-6 py-8">
       <motion.div
-        className="text-center mb-16"
+        className="text-center mb-12"
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
       >
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-white drop-shadow-lg">
+        <h1 className="text-5xl md:text-6xl font-extrabold mb-3 text-white drop-shadow-lg">
           Simple Pricing
         </h1>
         <p className="text-xl text-gray-300">Choose your plan</p>

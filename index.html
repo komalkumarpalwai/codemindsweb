@@ -2,13 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Poppins&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="https://codeminds-rho.vercel.app/favicon.ico" type="image/x-icon" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>CodeMinds</title>
   </head>
   <body>
     <div id="root"></div>
+    <script src="https://unpkg.com/lenis@1.3.1/dist/lenis.min.js">
+      const lenis = new Lenis({
+  autoRaf: true,
+});
+
+// Listen for the scroll event and log the event data
+lenis.on('scroll', (e) => {
+ // console.log(e);
+});
+    </script> 
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

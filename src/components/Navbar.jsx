@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link as ScrollLink } from 'react-scroll';
 import { Link as RouterLink } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
@@ -36,12 +35,11 @@ const PremiumNavbar = () => {
   }, []);
 
   const navItems = [
-    { name: 'Website Design', href: 'web-design', scroll: true },
-    { name: 'Graphic Design', href: 'graphic-design', scroll: true },
-    { name: 'Digital Marketing', href: 'digital-marketing', scroll: true },
-    { name: 'Brands', href: 'brands', scroll: true },
-    { name: 'Pricing', href: '/pricing', scroll: false },
-    { name: 'Internship', href: '/internship', scroll: false },
+    { name: 'Website Design', href: '/webdesign' },
+    { name: 'Graphic Design', href: '/graphicdesign' },
+    { name: 'Digital Marketing', href: '/digitalmarketing' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'Internship', href: '/internship' },
   ];
 
   return (
@@ -62,8 +60,8 @@ const PremiumNavbar = () => {
         </RouterLink>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center space-x-8">
-          {navItems.map(({ name, href, scroll }) => (
+        <div className="hidden lg:flex items-center space-x-6">
+          {navItems.map(({ name, href }) => (
             <motion.div
               key={name}
               className="relative text-sm font-medium uppercase tracking-wide text-white cursor-pointer"
@@ -71,26 +69,9 @@ const PremiumNavbar = () => {
               whileHover="hover"
               animate="rest"
             >
-              {scroll ? (
-                <ScrollLink
-                  to={href}
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  className="block"
-                >
-                  {name}
-                </ScrollLink>
-              ) : (
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  {name}
-                </a>
-              )}
+              <RouterLink to={href} className="block">
+                {name}
+              </RouterLink>
               <motion.span
                 variants={underlineVariants}
                 className="absolute bottom-0 left-0 h-[2px] bg-[#01C4C5] rounded"
@@ -99,8 +80,7 @@ const PremiumNavbar = () => {
           ))}
 
           {/* Contact */}
-          <motion.a
-            href="/contact"
+          <motion.div
             initial={{ scale: 1, boxShadow: '0px 0px 0px rgba(1,196,197,0)' }}
             whileHover={{
               scale: 1.05,
@@ -110,16 +90,32 @@ const PremiumNavbar = () => {
             }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            className="ml-6 px-4 py-1 text-sm font-semibold uppercase tracking-wide text-white border-2 border-white rounded-md cursor-pointer"
+            className="ml-4 px-4 py-1 text-sm font-semibold uppercase tracking-wide text-white border-2 border-white rounded-md cursor-pointer"
           >
-            Contact
-          </motion.a>
+            <RouterLink to="/contact">Contact</RouterLink>
+          </motion.div>
+
+          {/* Signup */}
+          <motion.div
+            initial={{ scale: 1, boxShadow: '0px 0px 0px rgba(1,196,197,0)' }}
+            whileHover={{
+              scale: 1.05,
+              backgroundColor: '#fff',
+              color: '#01C4C5',
+              boxShadow: '0 8px 20px rgba(255,255,255,0.4)'
+            }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            className="ml-2 px-4 py-1 text-sm font-semibold uppercase tracking-wide text-[#01C4C5] bg-transparent border-2 border-[#01C4C5] rounded-md cursor-pointer"
+          >
+            <RouterLink to="/signup">Signup</RouterLink>
+          </motion.div>
         </div>
 
         {/* Mobile Toggle */}
         <div className="lg:hidden">
           <button
-            onClick={() => setMobileMenuOpen(o => !o)}
+            onClick={() => setMobileMenuOpen((o) => !o)}
             className="text-white p-2 focus:outline-none"
           >
             {mobileMenuOpen ? <FiX size={26} /> : <FiMenu size={26} />}
@@ -137,38 +133,32 @@ const PremiumNavbar = () => {
             transition={{ duration: 0.3 }}
             className="lg:hidden bg-gradient-to-b from-black/90 to-black/60 px-4 pt-4 pb-6 space-y-4"
           >
-            {navItems.map(({ name, href, scroll }) =>
-              scroll ? (
-                <ScrollLink
-                  key={name}
-                  to={href}
-                  smooth={true}
-                  duration={500}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-3 rounded-md text-base font-medium text-white hover:text-gray-300 text-center cursor-pointer"
-                >
-                  {name}
-                </ScrollLink>
-              ) : (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-3 rounded-md text-base font-medium text-white hover:text-gray-300 text-center cursor-pointer"
-                >
-                  {name}
-                </a>
-              )
-            )}
-            <a
-              href="#contact"
+            {navItems.map(({ name, href }) => (
+              <RouterLink
+                key={name}
+                to={href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-3 rounded-md text-base font-medium text-white hover:text-gray-300 text-center cursor-pointer"
+              >
+                {name}
+              </RouterLink>
+            ))}
+
+            <RouterLink
+              to="/contact"
               onClick={() => setMobileMenuOpen(false)}
               className="block mt-2 py-2 px-4 text-base font-semibold uppercase tracking-wide text-white border-2 border-white rounded-md text-center cursor-pointer"
             >
               Contact
-            </a>
+            </RouterLink>
+
+            <RouterLink
+              to="/signup"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block mt-2 py-2 px-4 text-base font-semibold uppercase tracking-wide text-[#01C4C5] border-2 border-[#01C4C5] rounded-md text-center cursor-pointer"
+            >
+              Signup
+            </RouterLink>
           </motion.div>
         )}
       </AnimatePresence>
