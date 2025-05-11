@@ -5,7 +5,7 @@ import { HiCheck, HiOutlineArrowRight } from "react-icons/hi";
 const plans = [
   {
     name: "Basic",
-    price: "US $499",
+    price: " ₹9999 ",
     description:
       "Standalone components tailored to your needs and easily integrated. Perfect for website elements or sections.",
     features: [
@@ -18,7 +18,7 @@ const plans = [
   },
   {
     name: "Premium",
-    price: "US $1299",
+    price: " ₹14999",
     description:
       "Best for early-stage startups, businesses, and freelancers that need a marketing side to showcase their work and vision.",
     features: [
