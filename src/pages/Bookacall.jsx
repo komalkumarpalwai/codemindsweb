@@ -49,7 +49,7 @@ const BookMeetingPage = () => {
 
     emailjs
       .send(
-        "service_v3f5m0j",
+        "service_v6bzh5i",
         "template_4b9yble",
         templateParams,
         "uyfx14w7bZLZGX8ce"

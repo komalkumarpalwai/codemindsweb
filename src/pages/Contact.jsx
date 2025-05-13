@@ -60,7 +60,7 @@ const ContactPage = () => {
 
       // Send email using EmailJS
       emailjs.send(
-        'service_v3f5m0j', // Replace with your EmailJS service ID
+        'service_v6bzh5i', // Replace with your EmailJS service ID
         'template_4b9yble', // Replace with your EmailJS template ID
         templateParams,
         'uyfx14w7bZLZGX8ce' // Replace with your EmailJS user ID
