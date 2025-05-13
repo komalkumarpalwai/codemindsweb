@@ -1,205 +1,199 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { FiClock, FiCalendar, FiUser, FiMail } from 'react-icons/fi';
+import React, { useState } from "react";
+import emailjs from "emailjs-com";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const BookMeetingPage = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    name: "",
+    email: "",
     date: null,
-    time: '',
-    duration: '30',
-    purpose: ''
+    time: "",
+    duration: "30",
+    purpose: "",
   });
 
-  const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Generate time slots
   const generateTimeSlots = () => {
     const slots = [];
     for (let hour = 9; hour <= 18; hour++) {
-      ['00', '30'].forEach(minutes => {
-        const time = `${hour.toString().padStart(2, '0')}:${minutes}`;
-        slots.push(time);
-      });
+      slots.push(`${hour.toString().padStart(2, "0")}:00`);
+      if (hour !== 18) slots.push(`${hour.toString().padStart(2, "0")}:30`);
     }
     return slots;
   };
 
-  const timeSlots = generateTimeSlots();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.email.match(/\S+@\S+\.\S+/)) newErrors.email = 'Invalid email';
-    if (!formData.date) newErrors.date = 'Date is required';
-    if (!formData.time) newErrors.time = 'Time is required';
-    if (!formData.purpose.trim()) newErrors.purpose = 'Purpose is required';
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  const handleDateChange = (date) => {
+    setFormData((prev) => ({ ...prev, date }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Simulate API call
-      setTimeout(() => {
-        setIsSubmitted(true);
-      }, 1000);
-    }
+    setIsLoading(true);
+
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      date: formData.date ? formData.date.toDateString() : "",
+      time: formData.time,
+      duration: formData.duration,
+      message: formData.purpose,
+    };
+
+    emailjs
+      .send(
+        "service_v3f5m0j",
+        "template_4b9yble",
+        templateParams,
+        "uyfx14w7bZLZGX8ce"
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          setIsSubmitted(true);
+          setIsLoading(false);
+        },
+        (err) => {
+          console.log("FAILED...", err);
+          setIsLoading(false);
+        }
+      );
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-12 px-4">
-      <div className="max-w-4xl mx-auto mt-7">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
-            Schedule a Meeting
-          </h1>
-          <p className="text-xl text-gray-300">Book a time that works best for you</p>
-        </motion.div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white p-8">
+      <div className="max-w-2xl mx-auto animate-fade-in mt-10">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            Schedule Your Session
+          </h2>
+          <p className="text-gray-300 text-lg">
+            Let's discuss your next big idea! Choose a time that works best for you.
+          </p>
+        </div>
 
-        {!isSubmitted ? (
-          <motion.form
-            onSubmit={handleSubmit}
-            className="grid md:grid-cols-2 gap-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            {/* Personal Info */}
-            <div className="space-y-6">
-              <div>
-                <label className="block text-gray-300 mb-2 flex items-center">
-                  <FiUser className="mr-2 text-cyan-400" /> Name *
-                </label>
+        {isSubmitted ? (
+          <div className="text-center p-8 bg-gray-800 rounded-2xl border border-cyan-400/20 shadow-2xl shadow-cyan-400/10">
+            <div className="text-6xl mb-6">🎉</div>
+            <h3 className="text-2xl font-semibold mb-4 text-cyan-400">
+              Booking Confirmed!
+            </h3>
+            <p className="text-gray-300">
+              A calendar invite has been sent to your email. We look forward to our meeting!
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-cyan-300">Full Name</label>
                 <input
+                  type="text"
+                  name="name"
+                  className="w-full p-4 rounded-xl bg-gray-800 border border-gray-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30 transition-all"
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="w-full p-3 bg-gray-800 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                  onChange={handleChange}
+                  required
                 />
-                {errors.name && <p className="text-red-400 mt-1">{errors.name}</p>}
               </div>
 
-              <div>
-                <label className="block text-gray-300 mb-2 flex items-center">
-                  <FiMail className="mr-2 text-cyan-400" /> Email *
-                </label>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-cyan-300">Email</label>
                 <input
                   type="email"
+                  name="email"
+                  className="w-full p-4 rounded-xl bg-gray-800 border border-gray-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30 transition-all"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full p-3 bg-gray-800 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                  onChange={handleChange}
+                  required
                 />
-                {errors.email && <p className="text-red-400 mt-1">{errors.email}</p>}
               </div>
             </div>
 
-            {/* Meeting Details */}
-            <div className="space-y-6">
-              <div>
-                <label className="block text-gray-300 mb-2 flex items-center">
-                  <FiCalendar className="mr-2 text-cyan-400" /> Date *
-                </label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-cyan-300">Date</label>
                 <DatePicker
                   selected={formData.date}
-                  onChange={(date) => setFormData({...formData, date})}
-                  minDate={new Date()}
-                  className="w-full p-3 bg-gray-800 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:outline-none text-white"
+                  onChange={handleDateChange}
+                  className="w-full p-4 rounded-xl bg-gray-800 border border-gray-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30 transition-all"
                   placeholderText="Select date"
+                  minDate={new Date()}
+                  dateFormat="MMMM d, yyyy"
+                  required
                 />
-                {errors.date && <p className="text-red-400 mt-1">{errors.date}</p>}
               </div>
 
-              <div>
-                <label className="block text-gray-300 mb-2 flex items-center">
-                  <FiClock className="mr-2 text-cyan-400" /> Time *
-                </label>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-cyan-300">Time</label>
                 <select
+                  name="time"
                   value={formData.time}
-                  onChange={(e) => setFormData({...formData, time: e.target.value})}
-                  className="w-full p-3 bg-gray-800 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:outline-none text-white"
+                  onChange={handleChange}
+                  className="w-full p-4 rounded-xl bg-gray-800 border border-gray-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30 transition-all appearance-none"
+                  required
                 >
                   <option value="">Select time</option>
-                  {timeSlots.map((time) => (
-                    <option key={time} value={time}>
-                      {time}
+                  {generateTimeSlots().map((slot, index) => (
+                    <option key={index} value={slot}>
+                      {slot}
                     </option>
                   ))}
                 </select>
-                {errors.time && <p className="text-red-400 mt-1">{errors.time}</p>}
-              </div>
-
-              <div>
-                <label className="block text-gray-300 mb-2">Duration</label>
-                <select
-                  value={formData.duration}
-                  onChange={(e) => setFormData({...formData, duration: e.target.value})}
-                  className="w-full p-3 bg-gray-800 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:outline-none"
-                >
-                  <option value="30">30 Minutes</option>
-                  <option value="60">60 Minutes</option>
-                  <option value="90">90 Minutes</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-gray-300 mb-2">Meeting Purpose *</label>
-                <textarea
-                  value={formData.purpose}
-                  onChange={(e) => setFormData({...formData, purpose: e.target.value})}
-                  className="w-full p-3 bg-gray-800 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:outline-none h-32"
-                  placeholder="Briefly describe the purpose of the meeting"
-                />
-                {errors.purpose && <p className="text-red-400 mt-1">{errors.purpose}</p>}
               </div>
             </div>
 
-            <div className="md:col-span-2">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                type="submit"
-                className="w-full py-4 bg-cyan-500 text-white rounded-lg font-semibold hover:bg-cyan-600 transition-colors"
-              >
-                Schedule Meeting
-              </motion.button>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-cyan-300">Duration</label>
+              <div className="grid grid-cols-3 gap-4">
+                {['30', '45', '60'].map((duration) => (
+                  <button
+                    key={duration}
+                    type="button"
+                    onClick={() => setFormData(prev => ({ ...prev, duration }))}
+                    className={`p-3 rounded-lg text-center border ${
+                      formData.duration === duration
+                        ? 'border-cyan-400 bg-cyan-400/10 text-cyan-400'
+                        : 'border-gray-700 hover:border-cyan-400/40 hover:bg-cyan-400/5'
+                    } transition-all`}
+                  >
+                    {duration} mins
+                  </button>
+                ))}
+              </div>
             </div>
-          </motion.form>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center p-8 bg-gray-800/30 rounded-xl"
-          >
-            <h2 className="text-3xl font-bold mb-4 text-cyan-400">Meeting Scheduled!</h2>
-            <p className="text-xl text-gray-300 mb-6">
-              A confirmation has been sent to your email
-            </p>
-            <div className="space-y-2 text-gray-400">
-              <p>Date: {formData.date?.toLocaleDateString()}</p>
-              <p>Time: {formData.time}</p>
-              <p>Duration: {formData.duration} minutes</p>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-cyan-300">
+                Meeting Purpose
+              </label>
+              <textarea
+                name="purpose"
+                rows="4"
+                className="w-full p-4 rounded-xl bg-gray-800 border border-gray-700 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30 transition-all"
+                placeholder="Describe the purpose of our meeting..."
+                value={formData.purpose}
+                onChange={handleChange}
+                required
+              ></textarea>
             </div>
+
             <button
-              onClick={() => setIsSubmitted(false)}
-              className="mt-8 px-6 py-2 border border-cyan-500 text-cyan-400 rounded-lg hover:bg-cyan-500/10 transition-colors"
+              type="submit"
+              disabled={isLoading}
+              className="w-full p-4 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-400/90 hover:to-blue-500/90 text-gray-900 font-bold transition-all transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Schedule Another Meeting
+              {isLoading ? 'Scheduling...' : 'Confirm Meeting'}
             </button>
-          </motion.div>
+          </form>
         )}
-
-        <div className="mt-12 text-center text-gray-400">
-          <p>Need immediate assistance? Call +1 (555) 123-4567</p>
-        </div>
       </div>
     </div>
   );

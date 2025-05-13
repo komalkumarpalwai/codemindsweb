@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiLinkedin, FiInstagram, FiYoutube, FiPhone } from 'react-icons/fi';
+import emailjs from 'emailjs-com';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,8 @@ const ContactPage = () => {
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false); // State to track submission success
+  const [isError, setIsError] = useState(false); // State to track submission error
 
   const services = [
     'Mobile App Development',
@@ -42,9 +45,30 @@ const ContactPage = () => {
     e.preventDefault();
     if (validateForm()) {
       setIsSubmitting(true);
-      // Simulate API call
-      setTimeout(() => {
+      setIsSuccess(false); // Reset success state before sending
+
+      // Prepare the template parameters
+      const templateParams = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        company: formData.company,
+        service: formData.service,
+        help: formData.help,
+        message: formData.message
+      };
+
+      // Send email using EmailJS
+      emailjs.send(
+        'service_v3f5m0j', // Replace with your EmailJS service ID
+        'template_4b9yble', // Replace with your EmailJS template ID
+        templateParams,
+        'uyfx14w7bZLZGX8ce' // Replace with your EmailJS user ID
+      )
+      .then((response) => {
+        console.log('Email sent successfully', response);
         setIsSubmitting(false);
+        setIsSuccess(true); // Set success state to true
         setFormData({
           firstName: '',
           lastName: '',
@@ -55,12 +79,17 @@ const ContactPage = () => {
           message: '',
           agree: false
         });
-      }, 2000);
+      })
+      .catch((error) => {
+        console.error('Error sending email', error);
+        setIsSubmitting(false);
+        setIsError(true); // Set error state to true
+      });
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-12 px-4  ">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-12 px-4">
       <div className="max-w-7xl mx-auto mt-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -83,6 +112,7 @@ const ContactPage = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
           >
+            {/* Form Fields */}
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-gray-300 mb-2">First Name *</label>
@@ -93,7 +123,6 @@ const ContactPage = () => {
                 />
                 {errors.firstName && <p className="text-red-400 mt-1">{errors.firstName}</p>}
               </div>
-
               <div>
                 <label className="block text-gray-300 mb-2">Last Name *</label>
                 <input
@@ -105,6 +134,7 @@ const ContactPage = () => {
               </div>
             </div>
 
+            {/* Additional Form Fields */}
             <div>
               <label className="block text-gray-300 mb-2">Email *</label>
               <input
@@ -125,6 +155,7 @@ const ContactPage = () => {
               />
             </div>
 
+            {/* Additional Fields for Services and Help */}
             <div>
               <label className="block text-gray-300 mb-2">Services you're interested in</label>
               <select
@@ -182,6 +213,22 @@ const ContactPage = () => {
             </motion.button>
           </motion.form>
 
+          {/* Confirmation Message */}
+          {isSuccess && (
+            <div className="mt-8 p-6 bg-green-500 text-white rounded-lg text-center">
+              <h3 className="text-xl font-semibold">Thank you for reaching out!</h3>
+              <p>Your message has been sent successfully. We'll get back to you soon.</p>
+            </div>
+          )}
+
+          {/* Error Message */}
+          {isError && (
+            <div className="mt-8 p-6 bg-red-500 text-white rounded-lg text-center">
+              <h3 className="text-xl font-semibold">Something went wrong</h3>
+              <p>There was an error sending your message. Please try again later.</p>
+            </div>
+          )}
+
           {/* Connect Section */}
           <motion.div
             className="space-y-8"
@@ -190,62 +237,24 @@ const ContactPage = () => {
           >
             <div className="bg-gray-800/30 p-8 rounded-xl">
               <h2 className="text-2xl font-bold mb-6">Connect with us</h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <FiPhone className="text-cyan-400 text-xl" />
-                  <div>
-                    <p className="text-gray-300">+91 9390228526</p>
-                    <p className="text-gray-300">+91 8125903360</p>
-                  </div>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-4">
+                  <FiPhone className="text-cyan-500 text-2xl" />
+                  <span>+91 93902 28526</span>
                 </div>
-
-                <div className="flex items-center gap-4">
-                  <FiInstagram className="text-cyan-400 text-xl" />
-                  <a 
-                    href="https://instagram.com/codemindswebservices" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-cyan-400 transition-colors"
-                  >
-                    @codemindswebservices
-                  </a>
+                <div className="flex items-center space-x-4">
+                  <FiLinkedin className="text-cyan-500 text-2xl" />
+                  <span>LinkedIn</span>
                 </div>
-
-                <div className="flex items-center gap-4">
-                  <FiLinkedin className="text-cyan-400 text-xl" />
-                  <a 
-                    href="https://linkedin.com/company/codeminds-web-services" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-cyan-400 transition-colors"
-                  >
-                    Codeminds Web Services
-                  </a>
+                <div className="flex items-center space-x-4">
+                  <FiInstagram className="text-cyan-500 text-2xl" />
+                  <span>Instagram</span>
                 </div>
-
-                <div className="flex items-center gap-4">
-                  <FiYoutube className="text-cyan-400 text-xl" />
-                  <a 
-                    href="https://youtube.com/CodeMinds" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-cyan-400 transition-colors"
-                  >
-                    CodeMinds
-                  </a>
+                <div className="flex items-center space-x-4">
+                  <FiYoutube className="text-cyan-500 text-2xl" />
+                  <span>Youtube</span>
                 </div>
               </div>
-            </div>
-
-            <div className="bg-gray-800/30 p-8 rounded-xl">
-              <h3 className="text-xl font-bold mb-4">Enterprise Features</h3>
-              <ul className="space-y-4 text-gray-300">
-                <li>✓ One flexible agency for your entire company</li>
-                <li>✓ Secure user access management</li>
-                <li>✓ Dedicated support & custom plans</li>
-                <li>✓ 24/7 Priority support</li>
-              </ul>
             </div>
           </motion.div>
         </div>
