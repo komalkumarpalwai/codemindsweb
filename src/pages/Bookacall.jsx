@@ -47,12 +47,11 @@ const BookMeetingPage = () => {
       message: formData.purpose,
     };
 
-    emailjs
-      .send(
-        "service_v6bzh5i",
-        "template_4b9yble",
+     emailjs.send(
+        'service_71ajjcl', // Replace with your EmailJS service ID
+        'template_qdih36l', // Replace with your EmailJS template ID
         templateParams,
-        "uyfx14w7bZLZGX8ce"
+        'EFgyQlCLVT-9UjQiG' // Replace with your EmailJS user ID
       )
       .then(
         (response) => {
