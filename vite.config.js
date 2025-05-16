@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
+  base: '/',
   resolve: {
     alias: {
       'react-refresh/babel': path.resolve('./node_modules/react-refresh/babel.js'),
@@ -13,8 +14,7 @@ export default defineConfig({
     host: '0.0.0.0',
     allowedHosts: [
       'nothing-s0w5.onrender.com',
-      'localhost',  // You can add localhost here for local development as well.
+      'localhost',
     ],
-   // port: process.env.PORT ? parseInt(process.env.PORT) : 5173,
   },
 });

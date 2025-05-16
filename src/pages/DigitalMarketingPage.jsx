@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";  // <-- Add this import
 
 const services = [
   {
@@ -56,13 +57,16 @@ const DigitalMarketingPage = () => {
 
       {/* CTA Section */}
       <div className="text-center mt-14">
-     <a href="/bookacall">   <motion.button
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300 }}
-          className="bg-cyan-400 hover:bg-cyan-500 text-black font-semibold px-6 py-3 rounded-full shadow-md transition duration-300"
-        >
-          Get a Free Strategy Call
-        </motion.button></a>
+        <Link to="/bookacall">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="bg-cyan-400 hover:bg-cyan-500 text-black font-semibold px-6 py-3 rounded-full shadow-md transition duration-300"
+            aria-label="Get a free strategy call"
+          >
+            Get a Free Strategy Call
+          </motion.button>
+        </Link>
       </div>
     </div>
   );

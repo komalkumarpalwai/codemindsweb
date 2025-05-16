@@ -1,28 +1,27 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import ClientCarousel from "../pages/ClientCarousel";
+import { Link } from "react-router-dom"; // <-- Import Link
 
 const Home = () => {
   useEffect(() => {
     // Tawk.to Widget Script Integration
     const script = document.createElement("script");
-    script.src = "https://embed.tawk.to/6822d2e86e1d72190c299efe/1ir4179mm"; // Replace with your Tawk.to widget ID
+    script.src = "https://embed.tawk.to/6822d2e86e1d72190c299efe/1ir4179mm";
     script.async = true;
     script.charset = "UTF-8";
     script.setAttribute("crossorigin", "*");
 
-    // Insert the script into the body
     const s0 = document.getElementsByTagName("script")[0];
     s0.parentNode.insertBefore(script, s0);
 
-    // Cleanup the script when component unmounts
     return () => {
-      document.body.removeChild(script);
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
     };
   }, []);
 
   const handleChatToggle = () => {
-    // Open Tawk.to chat widget when clicked
     if (window.Tawk_API) {
       window.Tawk_API.toggle();
     } else {
@@ -83,19 +82,22 @@ const Home = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 3.0, duration: 0.5 }}
         >
-          <a href="/bookacall">
+          <Link to="/bookacall">
             <button className="bg-cyan-400 hover:bg-cyan-500 text-black font-semibold px-6 py-3 rounded-full shadow-lg transition-transform transform hover:scale-105">
               Book a Call
             </button>
-          </a>
+          </Link>
         </motion.div>
       </motion.div>
 
       {/* Chat Button */}
       <a
         href="#"
-        onClick={handleChatToggle}
-        className="fixed bottom-8 right-8 bg-cyan-400 hover:bg-cyan-500 text-white rounded-full  shadow-lg transition-all duration-300 transform hover:scale-110"
+        onClick={(e) => {
+          e.preventDefault();
+          handleChatToggle();
+        }}
+        className="fixed bottom-8 right-8 bg-cyan-400 hover:bg-cyan-500 text-white rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
       >
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 4, duration: 0.5 }}>
           <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">

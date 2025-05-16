@@ -1,11 +1,11 @@
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import {
   FiMail,
   FiPhone,
   FiMapPin,
   FiInstagram,
-  FiTwitter,
   FiYoutube,
   FiLinkedin
 } from 'react-icons/fi';
@@ -68,7 +68,7 @@ const PremiumFooter = () => {
               whileHover="hover"
               className="text-2xl font-bold mb-4"
             >
-              Codeminds
+              <Link to="/" className="hover:text-[#01C4C5]">Codeminds</Link>
             </motion.h3>
             <motion.p 
               variants={itemVariants}
@@ -84,7 +84,9 @@ const PremiumFooter = () => {
                 className="flex items-center"
               >
                 <FiMail className="mr-3" />
-                <a href="mailto:codemindswebservices@gmail.com">codemindswebservices@gmail.com</a>
+                <a href="mailto:codemindswebservices@gmail.com" className="hover:text-[#01C4C5]">
+                  codemindswebservices@gmail.com
+                </a>
               </motion.div>
               
               <motion.div 
@@ -94,9 +96,9 @@ const PremiumFooter = () => {
               >
                 <FiPhone className="mr-3" />
                 <div>
-                  <a href="tel:9390228526">93902 28526</a>
+                  <a href="tel:9390228526" className="hover:text-[#01C4C5]">93902 28526</a>
                   <span className="mx-2">/</span>
-                  <a href="tel:8142285266">81422 85266</a>
+                  <a href="tel:8142285266" className="hover:text-[#01C4C5]">81422 85266</a>
                 </div>
               </motion.div>
               
@@ -120,6 +122,8 @@ const PremiumFooter = () => {
                   key={index}
                   href={social.url}
                   aria-label={social.name}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ 
                     color: '#01C4C5',
                     y: -3,
@@ -140,7 +144,7 @@ const PremiumFooter = () => {
               variants={itemVariants}
               className="text-xl font-bold mb-4"
             >
-              Srinivas Rao
+              <Link to="/about" className="hover:text-[#01C4C5]">Srinivas Rao</Link>
             </motion.h3>
             <motion.p 
               variants={itemVariants}
@@ -165,7 +169,9 @@ const PremiumFooter = () => {
                 variants={itemVariants}
                 whileHover="hover"
               >
-                Branding Page
+                <Link to="/services/branding" className="hover:text-[#01C4C5]">
+                  Branding Page
+                </Link>
                 <div className="text-sm mt-1">💬 93902 28526 / 81422 85266</div>
               </motion.li>
               
@@ -173,7 +179,9 @@ const PremiumFooter = () => {
                 variants={itemVariants}
                 whileHover="hover"
               >
-                Ecommerce
+                <Link to="/services/ecommerce" className="hover:text-[#01C4C5]">
+                  Ecommerce
+                </Link>
                 <div className="text-sm mt-1">💬 codemindswebservices</div>
               </motion.li>
               
@@ -181,7 +189,9 @@ const PremiumFooter = () => {
                 variants={itemVariants}
                 whileHover="hover"
               >
-                Website Creation
+                <Link to="/services/website-creation" className="hover:text-[#01C4C5]">
+                  Website Creation
+                </Link>
                 <div className="text-sm mt-1">💬 codemindswebservices@gmail.com</div>
               </motion.li>
               
@@ -189,14 +199,18 @@ const PremiumFooter = () => {
                 variants={itemVariants}
                 whileHover="hover"
               >
-                Digital Marketing Using AI
+                <Link to="/services/digital-marketing" className="hover:text-[#01C4C5]">
+                  Digital Marketing Using AI
+                </Link>
               </motion.li>
               
               <motion.li 
                 variants={itemVariants}
                 whileHover="hover"
               >
-                Animation Videos
+                <Link to="/services/animation-videos" className="hover:text-[#01C4C5]">
+                  Animation Videos
+                </Link>
               </motion.li>
             </ul>
           </motion.div>

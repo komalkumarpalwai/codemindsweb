@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Bar } from "react-chartjs-2";
-import { motion, useAnimation, useViewportScroll, useTransform } from "framer-motion";
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js";
+import { motion, useAnimation, useScroll, useTransform } from "framer-motion";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
 
 // Register necessary Chart.js components
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
@@ -16,7 +24,6 @@ const Particle = ({ x, y }) => (
 );
 
 const InteractiveChart = () => {
-  // Example data for the bar chart
   const data = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
@@ -42,7 +49,7 @@ const InteractiveChart = () => {
         displayColors: false,
         callbacks: {
           label: (context) => {
-            return `${context.dataset.label}: $${context.raw}`; // Corrected template literal
+            return `${context.dataset.label}: $${context.raw}`;
           },
         },
       },
@@ -77,12 +84,18 @@ const InteractiveChart = () => {
   };
 
   return (
-    <div className="p-8 max-w-6xl mx-auto bg-gradient-to-r from-blue-200 to-blue-300 rounded-xl shadow-lg" id="graphic-design">
-      <h2 className="text-4xl font-semibold text-center text-gray-800 mb-6">Interactive Sales Data</h2>
+    <div
+      className="p-8 max-w-6xl mx-auto bg-gradient-to-r from-blue-200 to-blue-300 rounded-xl shadow-lg"
+      id="graphic-design"
+    >
+      <h2 className="text-4xl font-semibold text-center text-gray-800 mb-6">
+        Interactive Sales Data
+      </h2>
       {hoveredData && (
         <div className="text-center mb-6 text-xl font-semibold text-gray-700">
           <p>
-            You are viewing data for: <span className="text-teal-600">{hoveredData}</span>
+            You are viewing data for:{" "}
+            <span className="text-teal-600">{hoveredData}</span>
           </p>
         </div>
       )}
@@ -90,7 +103,9 @@ const InteractiveChart = () => {
         <Bar data={data} options={options} />
       </div>
       <div className="mt-6 text-center">
-        <p className="text-lg text-gray-600">Hover over the bars to view specific monthly sales data.</p>
+        <p className="text-lg text-gray-600">
+          Hover over the bars to view specific monthly sales data.
+        </p>
       </div>
     </div>
   );
@@ -98,12 +113,17 @@ const InteractiveChart = () => {
 
 const GraphicDesignPage = () => {
   const controls = useAnimation();
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
   const galleryX = useTransform(scrollY, [0, 500], ["0%", "-50%"]);
   const [fontIndex, setFontIndex] = useState(0);
   const fonts = ["font-sans", "font-serif", "font-mono"];
   const particles = useMemo(
-    () => Array.from({ length: 40 }, (_, i) => ({ id: i, x: Math.random() * 100 - 50, y: Math.random() * 100 - 50 })),
+    () =>
+      Array.from({ length: 40 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100 - 50,
+        y: Math.random() * 100 - 50,
+      })),
     []
   );
 
@@ -123,7 +143,12 @@ const GraphicDesignPage = () => {
             <Particle key={id} x={x} y={y} />
           ))}
         </div>
-        <motion.div initial={{ opacity: 0, y: 50 }} animate={controls} transition={{ duration: 1 }} className="text-center z-10 text-white">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={controls}
+          transition={{ duration: 1 }}
+          className="text-center z-10 text-white"
+        >
           <motion.div
             animate={{ rotate: [0, 15, -15, 0] }}
             transition={{ duration: 4, repeat: Infinity }}
@@ -143,7 +168,9 @@ const GraphicDesignPage = () => {
           </motion.div>
           <h1 className="text-6xl font-bold mb-4">Graphic Design</h1>
           <p className="text-2xl opacity-90">
-            We create stunning visuals for your brand.<br />From logos to social media posts, we've got you covered.
+            We create stunning visuals for your brand.
+            <br />
+            From logos to social media posts, we've got you covered.
           </p>
         </motion.div>
       </section>

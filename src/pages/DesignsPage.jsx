@@ -439,7 +439,7 @@ const DesignServicesPage = () => {
 
 
       {/* Interactive Design Style Showcase */}
-   <LandingPageB />
+ 
 
       {/* CTA Section */}
     <section className="relative text-center py-28 bg-gradient-to-r from-[#00A2C2] to-[#008C9E] text-white overflow-hidden">
